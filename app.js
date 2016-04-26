@@ -9,8 +9,13 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var api = require('./routes/apiv1');
 
-
 var app = express();
+
+//Base de datos
+require('./lib/connectMongoose');
+//Models
+
+//Rutas
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
