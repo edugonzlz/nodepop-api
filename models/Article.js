@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 
 var articleSchema = mongoose.Schema({
     name: String,
-    sale: Boolean,
+    forSale: Boolean,
     price: Number,
     photo: String,
     tags: [String]
