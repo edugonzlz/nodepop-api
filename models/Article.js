@@ -1,8 +1,8 @@
 "use strict";
 
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 
-var articleSchema = mongoose.Schema({
+let articleSchema = mongoose.Schema({
     name: String,
     forSale: Boolean,
     price: Number,
@@ -10,4 +10,14 @@ var articleSchema = mongoose.Schema({
     tags: [String]
 });
 
-mongoose.model('Article',articleSchema);
+articleSchema.statics.list = function (filter, start, limit, sort, callback) {
+
+    let query = Article.find(filter);
+    query.skip(start);
+    query.limit(limit);
+    query.sort(sort);
+    
+    return query.exec(callback);
+};
+
+var Article = mongoose.model('Article',articleSchema);
