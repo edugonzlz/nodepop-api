@@ -3,7 +3,8 @@
  */
 "use strict";
 
-//TODO: exigir autenticacion y generar token
+var jwt = require('jsonwebtoken');
+var config = require('../../local_config');
 
 let express = require('express');
 let router = express.Router();
@@ -13,11 +14,13 @@ let User = require('mongoose').model('User');
 router.post('/authenticate', function (req, res) {
     //Recogemos los valores que nos mandan
     let userName = req.body.name;
+    let userMail = req.body.email;
     let userPass = req.body.passw;
-    console.log(req.body.name, userPass);
+    console.log(req.body.name, userMail, userPass);
 
-    //Buscamos en la base de datos
-    User.findOne({name:userName}).exec(function (err, user) {
+    //Buscamos en la base de datos por nombre
+    //TODO añadir busqueda con email
+    User.findOne({name:userName, email:userMail}).exec(function (err, user) {
         if (err){
             return res.status(500).json({success:false, error:err});
         }
@@ -28,7 +31,10 @@ router.post('/authenticate', function (req, res) {
             return res.status(401).json({success:false, error:'Authentication failed. The password is not correct'});
         }
         
-        let token = '';
+        //Creamos el token con la clave del fichero de configuracion y lo devolvemos
+        let token = jwt.sign({id:userName._id},config.jwt.secret, {expiresIn:60*60*2*24});
+        
+        user.token()
         
         return res.json({success:true, token:token})
     })

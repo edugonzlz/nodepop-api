@@ -9,6 +9,12 @@ let router = express.Router();
 let mongoose = require('mongoose');
 let Article = mongoose.model('Article');
 
+let jwtAuth = require('../../lib/jwtAuth');
+
+//Requerimos contraseña para uso del modulo
+
+router.use(jwtAuth());
+
 router.get('/', function (req, res, next) {
    //Recogemos los parametros de la busqueda
     let name = req.query.name;
