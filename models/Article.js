@@ -12,6 +12,7 @@ let articleSchema = mongoose.Schema({
 
 articleSchema.statics.list = function (filter, start, limit, sort, callback) {
 
+    //TODO pendiente filtrar por tags
     let query = Article.find(filter);
     query.skip(start);
     query.limit(limit);

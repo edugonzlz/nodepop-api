@@ -9,26 +9,11 @@ let router = express.Router();
 let mongoose = require('mongoose');
 let Article = mongoose.model('Article');
 
-// router.get("/all", function (req, res, next) {
-//
-//     //res.send("Mostrando todos los articulos de Nodepop");
-//     let query = Article.find({});
-//
-//     return query.exec(function (err, articles) {
-//         if (err){
-//             next(err);
-//             return;
-//         }
-//         //Devolvemos el resultado
-//         res.json({success: true, rows: articles});
-//        //return mongoose(null, articles);
-//     });
-// });
-
 router.get('/', function (req, res, next) {
    //Recogemos los parametros de la busqueda
     let name = req.query.name;
-    let price = req.query.price;
+    let minPrice = req.query.price;
+    let maxPrice = req.query.maxPrice;
     let forSale = req.query.forSale;
     let tags = req.query.tags;
 
@@ -41,10 +26,13 @@ router.get('/', function (req, res, next) {
         // searchCriteria.name = new RegExp('^' + name + 'i');
         searchCriteria.name = new RegExp('^' + name, 'i');
     }
-    if (typeof price !== 'undefined'){
-        searchCriteria.price = price;
-        // searchCriteria.price.$gte = price;
-        // searchCriteria.price.$lte = price;
+    //TODO pendiente arreglar las combinaciones de precios
+    if (typeof minPrice !== 'undefined'){
+        if (typeof maxPrice !== 'undefined'){
+            searchCriteria.price = {$gte: minPrice, $lte: maxPrice};
+        }else{
+            searchCriteria.price = minPrice;
+        }
     }
     if (typeof forSale !== 'undefined'){
         searchCriteria.forSale = forSale;
@@ -53,16 +41,17 @@ router.get('/', function (req, res, next) {
         searchCriteria.tags = tags;
     }
 
-    //Llamamos a la busqueda
-    Article.list(searchCriteria, start, limit, sort, function (err, rows) {
+    //Llamamos a la busqueda con los parametros
+    return Article.list(searchCriteria, start, limit, sort, function (err, rows) {
         if (err){
             return res.json({success:false, error:err})
         }
-        res.json({success:true, rows:rows});
+        return res.json({success:true, rows:rows});
     })
 });
 
 router.post("/", function (req, res, next) {
+    
     let article = new Article(req.body);
 
     article.save(function (err, saved) {
