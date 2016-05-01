@@ -13,7 +13,8 @@ var app = express();
 require('./lib/connectMongoose');
 //Models
 require('./models/Article');
-require('./models/User');//Rutas
+require('./models/User');
+require('./models/PushToken');
 
 
 // view engine setup

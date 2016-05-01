@@ -1,12 +1,12 @@
 "use strict";
 
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 
-var userSchema = mongoose.Schema({
+let userSchema = mongoose.Schema({
     //TODO: hacer todo required y hacer index por email
     name: String,
     email: String,
     passw: String
 });
 
-var User = mongoose.model('User', userSchema);
+let User = mongoose.model('User', userSchema);

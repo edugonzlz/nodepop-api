@@ -29,7 +29,6 @@ router.get('/', function (req, res, next) {
 
     let searchCriteria = {};
     if (typeof name !== 'undefined'){
-        // searchCriteria.name = new RegExp('^' + name + 'i');
         searchCriteria.name = new RegExp('^' + name, 'i');
     }
     //TODO pendiente arreglar las combinaciones de precios
@@ -66,7 +65,7 @@ router.post("/", function (req, res, next) {
             return;
         }
         //Respondemos con el resultado
-        res.json({success:true, saved:saved});
+        return res.json({success:true, saved:saved});
     })
 });
 
