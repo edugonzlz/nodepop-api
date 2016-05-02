@@ -11,8 +11,7 @@ let Article = mongoose.model('Article');
 
 let jwtAuth = require('../../lib/jwtAuth');
 
-//Requerimos contraseña para uso del modulo
-
+//Requerimos autenticacion para uso del modulo
 router.use(jwtAuth());
 
 router.get('/', function (req, res, next) {
@@ -27,6 +26,7 @@ router.get('/', function (req, res, next) {
     let limit = parseInt(req.query.limit) || null;
     let sort = req.query.sort || null;
 
+    //Creamos un objeto de busqueda con los parametros
     let searchCriteria = {};
     if (typeof name !== 'undefined'){
         searchCriteria.name = new RegExp('^' + name, 'i');
@@ -46,7 +46,7 @@ router.get('/', function (req, res, next) {
         searchCriteria.tags = tags;
     }
 
-    //Llamamos a la busqueda con los parametros
+    //Llamamos a la busqueda con el critrerio de busqueda y paginacion
     return Article.list(searchCriteria, start, limit, sort, function (err, rows) {
         if (err){
             return res.json({success:false, error:err})
@@ -55,18 +55,17 @@ router.get('/', function (req, res, next) {
     })
 });
 
+
 router.post("/", function (req, res, next) {
     
-    let article = new Article(req.body);
+    let article = req.body;
 
-    article.save(function (err, saved) {
+    Article.saveArticle(article, function (err, saved) {
         if (err){
-            next(err);
-            return;
+            return res.json({success:false, error: err});
         }
-        //Respondemos con el resultado
         return res.json({success:true, saved:saved});
-    })
+    });
 });
 
 module.exports = router;

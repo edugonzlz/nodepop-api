@@ -21,4 +21,17 @@ articleSchema.statics.list = function (filter, start, limit, sort, callback) {
     return query.exec(callback);
 };
 
+articleSchema.statics.saveArticle = function (newArticle, callback) {
+
+    let article = new Article (newArticle);
+
+    article.save(function (err, saved) {
+        if (err){
+            next(err);
+            return;
+        }
+        return callback(err,saved);
+    })
+};
+
 var Article = mongoose.model('Article',articleSchema);

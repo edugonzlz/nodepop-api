@@ -20,7 +20,7 @@ router.post('/authenticate', function (req, res, next) {
 
     //Buscamos en la base de datos por nombre
     //TODO añadir busqueda con email
-    User.findOne({name:userName, email:userMail}).exec(function (err, user) {
+    User.findOne({email:userMail}).exec(function (err, user) {
         if (err){
             return res.status(500).json({success:false, error:err});
         }
@@ -35,7 +35,7 @@ router.post('/authenticate', function (req, res, next) {
         let token = jwt.sign({id:user._id},config.jwt.secret, {expiresIn:60*60*2*24});
 
         //Guardamos el token
-        PushToken.save(user, token);
+        PushToken.saveToken(user, token);
 
         return res.json({success:true, token:token})
     })

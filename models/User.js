@@ -9,4 +9,16 @@ let userSchema = mongoose.Schema({
     passw: String
 });
 
+userSchema.statics.saveUser = function (newUser, callback) {
+
+    let user = new User(newUser);
+
+    user.save(function (err, saved) {
+        if (err){
+            next(err);
+            return;
+        }
+        return callback(err,saved);
+    })
+};
 let User = mongoose.model('User', userSchema);
