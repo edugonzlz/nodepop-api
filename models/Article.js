@@ -27,8 +27,7 @@ articleSchema.statics.saveArticle = function (newArticle, callback) {
 
     article.save(function (err, saved) {
         if (err){
-            next(err);
-            return;
+            return callback(err);
         }
         return callback(err,saved);
     })
