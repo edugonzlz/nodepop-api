@@ -11,13 +11,15 @@ let router = express.Router();
 
 let User = require('mongoose').model('User');
 let PushToken = require('mongoose').model('PushToken');
+let hash = require('hash.js');
 
 router.post('/register',function (req, res, next) {
     //Recogemos los valores que nos mandan
     let userName = req.body.name;
     let userMail = req.body.email;
-    let userPass = req.body.passw;
-    
+    let userPass = hash.sha256().update(req.body.passw).digest('hex');
+    console.log(userPass);
+
     //Comprobamos si ya existe
     User.findUser(userName, userMail, userPass, res, function (err, user) {
         if (err){
@@ -42,9 +44,9 @@ router.post('/authenticate', function (req, res, next) {
     //Recogemos los valores que nos mandan
     let userName = req.body.name;
     let userMail = req.body.email;
-    let userPass = req.body.passw;
+    let userPass = hash.sha256().update(req.body.passw).digest('hex');
 
-    //Buscamos en la base de datos por nombre
+    //Buscamos el usuario en la base de datos
     User.findUser(userName, userMail, userPass, res, function (err, user) {
         if (err){
             return (err);
@@ -68,7 +70,7 @@ router.put('/pushtoken', function (req, res) {
 
     let userName = req.body.name;
     let userMail = req.body.email;
-    let userPass = req.body.passw;
+    let userPass = hash.sha256().update(req.body.passw).digest('hex');
 
     let pushToken = req.query.pushtoken;
 

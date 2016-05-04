@@ -17,12 +17,15 @@ userSchema.statics.saveUser = function (userName, userMail, userPass, callback) 
         if (err){
             return callback(err);
         }
-        return callback(err,saved);
+        //No envio el hash/password guardado
+        return callback(err,({name:saved.name, email:saved.email}));
     })
 };
 
 userSchema.statics.findUser = function (userName, userMail, userPass, res, callback) {
     
+    //Busqueda por mail
+    //todo: implementar busque por nombre tambien??
     User.findOne({email:userMail}).exec(function (err, user) {
         if (err){
             return callback(res.status(500).json({success:false, error:err}));
