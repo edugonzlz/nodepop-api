@@ -1,6 +1,7 @@
 "use strict";
 
 let mongoose = require('mongoose');
+let hash = require('hash.js');
 
 let userSchema = mongoose.Schema({
     //TODO: hacer todo required y hacer index por email
@@ -9,26 +10,26 @@ let userSchema = mongoose.Schema({
     passw: String
 });
 
-userSchema.statics.saveUser = function (userName, userMail, userPass, callback) {
-
-    let user = new User({name:userName, email:userMail, passw:userPass});
+userSchema.statics.saveUser = function (userData,  callback) {
+    
+    let user = new User({name:userData.name,
+        email:userData.email,
+        passw:hash.sha256().update(userData.passw).digest('hex')});
 
     user.save(function (err, saved) {
         if (err){
             return callback(err);
         }
         //No envio el hash/password guardado
-        return callback(err,({name:saved.name, email:saved.email}));
+        return callback(null, ({name:saved.name, email:saved.email}));
     })
 };
 
-userSchema.statics.findUser = function (userName, userMail, userPass, res, callback) {
+userSchema.statics.findUser = function (userData, callback) {
     
-    //Busqueda por mail
-    //todo: implementar busque por nombre tambien??
-    User.findOne({email:userMail}).exec(function (err, user) {
+    User.findOne({email:userData.email}).exec(function (err, user) {
         if (err){
-            return callback(res.status(500).json({success:false, error:err}));
+            return callback(err);
         }
         return callback(null, user)
     })

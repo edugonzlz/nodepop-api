@@ -14,11 +14,10 @@ let jwtAuth = require('../../lib/jwtAuth');
 //Requerimos autenticacion para uso del modulo
 router.use(jwtAuth());
 
-router.get('/', function (req, res, next) {
+router.get('/', function (req, res) {
    //Recogemos los parametros de la busqueda
     let name = req.query.name;
-    let minPrice = req.query.price;
-    let maxPrice = req.query.maxPrice;
+    let price = req.query.price;
     let forSale = req.query.forSale;
     let tags = req.query.tags;
 
@@ -31,32 +30,54 @@ router.get('/', function (req, res, next) {
     if (typeof name !== 'undefined'){
         searchCriteria.name = new RegExp('^' + name, 'i');
     }
-    //TODO pendiente arreglar las combinaciones de precios
-    if (typeof minPrice !== 'undefined'){
-        if (typeof maxPrice !== 'undefined'){
-            searchCriteria.price = {$gte: minPrice, $lte: maxPrice};
-        }else{
-            searchCriteria.price = minPrice;
+
+    if (typeof price !== 'undefined'){
+        let splitPrice = price.split('-');
+        //precio unico
+        if (splitPrice.length === 1) {
+            searchCriteria.price = splitPrice[0];
+        }
+        //precio minimo
+        else if (splitPrice[1] === ''){
+            searchCriteria.price = {$gte: splitPrice[0]};
+        }
+        //precio maximo
+        else if (splitPrice[0] === ''){
+            searchCriteria.price = {$lte: splitPrice[1]};
+        }
+        //precio minimo y maximo
+        else{
+            searchCriteria.price = {$gte: splitPrice[0], $lte: splitPrice[1]};
         }
     }
+
     if (typeof forSale !== 'undefined'){
         searchCriteria.forSale = forSale;
     }
     if (typeof tags !== 'undefined'){
-        searchCriteria.tags = tags;
+        searchCriteria.tags = {$in: tags};
     }
 
     //Llamamos a la busqueda con el critrerio de busqueda y paginacion
     return Article.list(searchCriteria, start, limit, sort, function (err, rows) {
         if (err){
-            return res.json({success:false, error:err})
+            return res.json({success:false, error:err});
         }
         return res.json({success:true, rows:rows});
     })
 });
 
+router.get('/tags',function (req, res) {
+    
+    Article.tagList(function (err, tagList) {
+        if (err){
+            return res.json({success:false, error:err});
+        }
+        return res.json({success:true, rows:tagList});
+    })
+});
 
-router.post("/", function (req, res, next) {
+router.post("/", function (req, res) {
     
     let article = req.body;
 
@@ -64,6 +85,7 @@ router.post("/", function (req, res, next) {
         if (err){
             return res.json({success:false, error: err});
         }
+        console.log('Articulo guardado', saved);
         return res.json({success:true, saved:saved});
     });
 });

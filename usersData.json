@@ -1,9 +1,9 @@
 {
   "users":[
     {
-      "name": "Edu",
+      "name":"Edu",
       "email":"edu@mail.com",
-      "passw":1234
+      "passw":"1234"
     }
   ]
 }

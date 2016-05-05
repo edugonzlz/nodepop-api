@@ -1,6 +1,7 @@
 "use strict";
 
 let mongoose = require('mongoose');
+let async = require('async');
 
 let articleSchema = mongoose.Schema({
     name: String,
@@ -31,6 +32,18 @@ articleSchema.statics.saveArticle = function (newArticle, callback) {
         }
         return callback(err,saved);
     })
+};
+
+articleSchema.statics.tagList = function (callback) {
+
+    // Article.distinct('tags', function (err, tags) {
+    //     if (err){
+    //         return callback(err);
+    //     }
+    //     return callback(null, tags);
+    // });
+    let query = Article.distinct('tags');
+    return query.exec(callback);
 };
 
 var Article = mongoose.model('Article',articleSchema);

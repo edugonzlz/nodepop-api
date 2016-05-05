@@ -23,12 +23,12 @@ pushTokenSchema.statics.saveToken = function (user, pushToken, callback) {
                 if (err) {
                     return callback(err);
                 }
-                console.log('token guardado por primera vez para este usuario:', user.name, saved.token);
-                return callback(null, saved);
+                console.log('token guardado por primera vez para este usuario:', user.name, pushToken);
+                callback(null, saved);
             });
         }
         //si existe lo actualizamos
-        console.log('token encontrado y actualizado');
+        console.log('token encontrado y actualizado', pushToken);
         PushToken.update({userId: user._id}, {token: pushToken}).exec(function (err, saved) {
             if (err){
                 return callback(err);

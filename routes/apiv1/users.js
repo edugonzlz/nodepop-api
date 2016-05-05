@@ -13,24 +13,24 @@ let User = require('mongoose').model('User');
 let PushToken = require('mongoose').model('PushToken');
 let hash = require('hash.js');
 
-router.post('/register',function (req, res, next) {
+router.post('/register',function (req, res) {
     //Recogemos los valores que nos mandan
     let userName = req.body.name;
     let userMail = req.body.email;
-    let userPass = hash.sha256().update(req.body.passw).digest('hex');
-    console.log(userPass);
-
+    let userPass = req.body.passw;
+    
+    let userData = new User({name:userName, email:userMail, passw:userPass});
     //Comprobamos si ya existe
-    User.findUser(userName, userMail, userPass, res, function (err, user) {
+    User.findUser(userData, function (err, user) {
         if (err){
-            return (err);
+            return res.status(500).json({success:false, error:err});
         }
         //Si ya existe
         if (user){
             return res.json({success:false, err:'El usuario ya existe'});
         }
         //Si no existe creamos uno
-        User.saveUser(userName, userMail, userPass, function (err, saved) {
+        User.saveUser(userData, function (err, saved) {
             if (err){
                 return res.status(500).json({success:false, err:err});
             }
@@ -40,16 +40,18 @@ router.post('/register',function (req, res, next) {
     })
 });
 
-router.post('/authenticate', function (req, res, next) {
+router.post('/authenticate', function (req, res) {
     //Recogemos los valores que nos mandan
     let userName = req.body.name;
     let userMail = req.body.email;
     let userPass = hash.sha256().update(req.body.passw).digest('hex');
 
+    let userData = new User({name:userName, email:userMail});
+
     //Buscamos el usuario en la base de datos
-    User.findUser(userName, userMail, userPass, res, function (err, user) {
+    User.findUser(userData, function (err, user) {
         if (err){
-            return (err);
+            return res.status(500).json({success:false, error:err});
         }
         if (!user){
             return res.status(401).json({success:false, error:'Authetication failed. User name or email is not found'});
@@ -64,19 +66,20 @@ router.post('/authenticate', function (req, res, next) {
     })
 });
 
-
-
 router.put('/pushtoken', function (req, res) {
 
     let userName = req.body.name;
     let userMail = req.body.email;
-    let userPass = hash.sha256().update(req.body.passw).digest('hex');
+    let userData = new User({name:userName, email:userMail});
 
     let pushToken = req.query.pushtoken;
 
-    User.findUser(userName, userMail, userPass, res, function (err, res, user) {
+    User.findUser(userData, function (err, user) {
         if (err){
-            return (err);
+            return res.status(500).json({success:false, error:err});
+        }
+        if (!user){
+            return res.status(401).json({success:false, error:' User name or email is not found'});
         }
         //Guardamos el token
         PushToken.saveToken(user, pushToken, function (err, saved ) {
