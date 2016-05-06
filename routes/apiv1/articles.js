@@ -10,11 +10,12 @@ let mongoose = require('mongoose');
 let Article = mongoose.model('Article');
 
 let jwtAuth = require('../../lib/jwtAuth');
-
+let mobileDetect = require('mobile-detect');
 //Requerimos autenticacion para uso del modulo
-router.use(jwtAuth());
+//router.use(jwtAuth());
 
 router.get('/', function (req, res) {
+
    //Recogemos los parametros de la busqueda
     let name = req.query.name;
     let price = req.query.price;

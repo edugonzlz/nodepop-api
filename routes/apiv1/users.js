@@ -12,6 +12,7 @@ let router = express.Router();
 let User = require('mongoose').model('User');
 let PushToken = require('mongoose').model('PushToken');
 let hash = require('hash.js');
+let mobileDetect = require('mobile-detect');
 
 router.post('/register',function (req, res) {
     //Recogemos los valores que nos mandan
@@ -74,19 +75,25 @@ router.put('/pushtoken', function (req, res) {
 
     let pushToken = req.query.pushtoken;
 
+    let md = new mobileDetect(req.headers['user-agent']);
+    //Si consultamos desde un movil detectara la plataforma
+    //Para detectarla desde otra plataforma se requiere una query
+    let platform = md.os() || req.query.platform;
+
     User.findUser(userData, function (err, user) {
         if (err){
             return res.status(500).json({success:false, error:err});
         }
         if (!user){
+            //todo: Guardamos token si no existe usuario???
             return res.status(401).json({success:false, error:' User name or email is not found'});
         }
         //Guardamos el token
-        PushToken.saveToken(user, pushToken, function (err, saved ) {
+        PushToken.saveToken(user, pushToken, platform, function (err, saved ) {
             if (err){
                 return res.status(500).json({success: false, error: err});
             }
-            return res.json({success:true, saved:saved });
+            return res.json({success:true, saved:saved});
         });
     })
 });
