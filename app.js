@@ -28,6 +28,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/images/articles', express.static(path.join(__dirname, 'public/images')));
 
 app.use('/', routes);
 app.use('/apiv1/articles', require('./routes/apiv1/articles'));

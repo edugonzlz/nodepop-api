@@ -50,7 +50,7 @@ router.get('/', function (req, res) {
             searchCriteria.price = {$gte: splitPrice[0], $lte: splitPrice[1]};
         }
     }
-    
+
     if (typeof forSale !== 'undefined'){
         searchCriteria.forSale = forSale;
     }
@@ -66,6 +66,10 @@ router.get('/', function (req, res) {
         return res.json({success:true, rows:rows});
     })
 });
+
+// router.get('/*.jpg', function (req, res) {
+//
+// });
 
 router.get('/tags',function (req, res) {
     
