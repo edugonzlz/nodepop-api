@@ -29,13 +29,13 @@ router.post('/register',function (req, res) {
     
     let userData = new User({name:userName, email:userMail, passw:userPass});
     
-    //Comprobamos si ya existe
+    //Comprobamos si ya existe el usuario con el mismo email
     User.findUser(userData, function (err, user) {
         if (err){
             return errorManager(err, req, res);
         }
-        //Si ya existe
         if (user){
+            console.log(user);
             return errorManager(new Error('USER_EXIST'), req, res);
         }
         //Si no existe creamos uno
@@ -50,7 +50,6 @@ router.post('/register',function (req, res) {
 });
 
 router.post('/authenticate', function (req, res) {
-    //Recogemos los valores que nos mandan
     let userName = req.body.name;
     let userMail = req.body.email;
 
@@ -85,9 +84,9 @@ router.put('/pushtoken', function (req, res) {
 
     let userData = new User({name:userName, email:userMail});
 
-    let md = new mobileDetect(req.headers['user-agent']);
     //Si consultamos desde un movil mobileDetect detectara la plataforma
     //Para detectarla desde otra plataforma se requiere una query
+    let md = new mobileDetect(req.headers['user-agent']);
     let platform = md.os() || req.query.platform;
 
     User.findUser(userData, function (err, user) {
@@ -101,26 +100,6 @@ router.put('/pushtoken', function (req, res) {
             }
             return res.json({success: true, saved: saved});
         });
-
-        // //Guardamos el token para un usuario NO registrado
-        // if (!user){
-        //     PushToken.saveToken(null, pushToken, platform, function (err, saved ) {
-        //         if (err){
-        //             return errorManager(err, req, res);
-        //         }
-        //         return res.json({success:true, saved:saved});
-        //     });
-        // }
-        //
-        // //Guardamos el token para un usuario registrado
-        // if (user) {
-        //     PushToken.saveToken(user, pushToken, platform, function (err, saved) {
-        //         if (err) {
-        //             return errorManager(err, req, res);
-        //         }
-        //         return res.json({success: true, saved: saved});
-        //     });
-        // }
     })
 });
 

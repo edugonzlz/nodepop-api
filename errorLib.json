@@ -16,5 +16,9 @@
     "PASS_REQUIRED":{
         "es": "Es obligatorio introducir una contraseña",
         "eng": "Please insert a password"
+    },
+    "UNKNOWN_ERROR":{
+        "es": "Error desconocido",
+        "eng": "Unknown error"
     }
 }

@@ -4,14 +4,10 @@ let mongoose = require('mongoose');
 let hash = require('hash.js');
 
 let userSchema = mongoose.Schema({
-    //TODO: hacer todo required y hacer index por email
     name: {type: String, required: true},
     email: {type: String, index: true, required: true},
     passw: {type: String, required: true}
 });
-
-// userSchema.index({ email: 1, type: -1 });
-// userSchema.index({ email: 1 }, { unique: true });
 
 userSchema.statics.saveUser = function (userData,  callback) {
 
@@ -30,6 +26,7 @@ userSchema.statics.saveUser = function (userData,  callback) {
 
 userSchema.statics.findUser = function (userData, callback) {
     
+    //Buscamos por email. Usuarios con el mismo nombre pero diferente email son permitidos
     User.findOne({email:userData.email}).exec(function (err, user) {
         if (err){
             return callback(err);

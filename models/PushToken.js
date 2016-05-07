@@ -19,8 +19,9 @@ pushTokenSchema.statics.saveToken = function (user, pushToken, platform, callbac
                 return callback(err);
             }
             console.log('token guardado por primera vez para un usuario NO registrado', pushToken);
-            return callback(null, saved);
+            return callback(err, saved);
         });
+        
     } else {
 
         //Buscamos un pushToken que exista con el id de usuario

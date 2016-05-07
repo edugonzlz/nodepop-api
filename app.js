@@ -28,7 +28,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use((req, res, next) => {
-    req.lang = req.get('x-lang') || 'en';
+    req.lang = req.get('x-lang') || 'es';
     next();
 });
 app.use(express.static(path.join(__dirname, 'public')));

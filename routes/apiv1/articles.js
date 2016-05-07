@@ -14,7 +14,7 @@ let mobileDetect = require('mobile-detect');
 let errorManager = require('../../lib/errorManager');
 
 //Requerimos autenticacion para uso del modulo
-//router.use(jwtAuth());
+router.use(jwtAuth());
 
 router.get('/', function (req, res) {
 
@@ -69,10 +69,6 @@ router.get('/', function (req, res) {
         return res.json({success:true, rows:rows});
     })
 });
-
-// router.get('/*.jpg', function (req, res) {
-//
-// });
 
 router.get('/tags',function (req, res) {
     
