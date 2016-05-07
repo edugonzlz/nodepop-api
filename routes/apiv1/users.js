@@ -21,8 +21,14 @@ router.post('/register',function (req, res) {
     let userName = req.body.name;
     let userMail = req.body.email;
     let userPass = req.body.passw;
-
+    
+    //Hash genera codigo incluso con un undefined, por eso comprobamos primero
+    if (typeof userPass === 'undefined'){
+        return errorManager(new Error('PASS_REQUIRED'), req, res);
+    }
+    
     let userData = new User({name:userName, email:userMail, passw:userPass});
+    
     //Comprobamos si ya existe
     User.findUser(userData, function (err, user) {
         if (err){
@@ -30,7 +36,7 @@ router.post('/register',function (req, res) {
         }
         //Si ya existe
         if (user){
-            return errorManager(new Error('PASS_REQUIRED'), req, res);
+            return errorManager(new Error('USER_EXIST'), req, res);
         }
         //Si no existe creamos uno
         User.saveUser(userData, function (err, saved) {
@@ -47,6 +53,8 @@ router.post('/authenticate', function (req, res) {
     //Recogemos los valores que nos mandan
     let userName = req.body.name;
     let userMail = req.body.email;
+
+    //Convertimos a un hash aqui, porque necesitamos comprobar la contraseña hasheada
     let userPass = hash.sha256().update(req.body.passw).digest('hex');
 
     let userData = new User({name:userName, email:userMail});
