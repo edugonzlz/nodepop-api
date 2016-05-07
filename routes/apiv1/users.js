@@ -81,12 +81,12 @@ router.put('/pushtoken', function (req, res) {
 
     let userName = req.body.name;
     let userMail = req.body.email;
-    let userData = new User({name:userName, email:userMail});
-
     let pushToken = req.query.pushtoken;
 
+    let userData = new User({name:userName, email:userMail});
+
     let md = new mobileDetect(req.headers['user-agent']);
-    //Si consultamos desde un movil detectara la plataforma
+    //Si consultamos desde un movil mobileDetect detectara la plataforma
     //Para detectarla desde otra plataforma se requiere una query
     let platform = md.os() || req.query.platform;
 
@@ -94,17 +94,33 @@ router.put('/pushtoken', function (req, res) {
         if (err){
             return errorManager(err, req, res);
         }
-        if (!user){
-            //todo: Guardamos token si no existe usuario???
-            return errorManager(new Error('USER_OR_MAIL_NOT_FOUND'), req, res);
-        }
-        //Guardamos el token
-        PushToken.saveToken(user, pushToken, platform, function (err, saved ) {
-            if (err){
+        
+        PushToken.saveToken(user, pushToken, platform, function (err, saved) {
+            if (err) {
                 return errorManager(err, req, res);
             }
-            return res.json({success:true, saved:saved});
+            return res.json({success: true, saved: saved});
         });
+
+        // //Guardamos el token para un usuario NO registrado
+        // if (!user){
+        //     PushToken.saveToken(null, pushToken, platform, function (err, saved ) {
+        //         if (err){
+        //             return errorManager(err, req, res);
+        //         }
+        //         return res.json({success:true, saved:saved});
+        //     });
+        // }
+        //
+        // //Guardamos el token para un usuario registrado
+        // if (user) {
+        //     PushToken.saveToken(user, pushToken, platform, function (err, saved) {
+        //         if (err) {
+        //             return errorManager(err, req, res);
+        //         }
+        //         return res.json({success: true, saved: saved});
+        //     });
+        // }
     })
 });
 
