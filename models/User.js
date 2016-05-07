@@ -2,6 +2,7 @@
 
 let mongoose = require('mongoose');
 let hash = require('hash.js');
+let errorManager = require('../lib/errorManager');
 
 let userSchema = mongoose.Schema({
     //TODO: hacer todo required y hacer index por email
@@ -17,7 +18,7 @@ userSchema.statics.saveUser = function (userData,  callback) {
 
     //Hash genera codigo incluso con un undefined, por eso comprobamos primero
     if (typeof userData.passw === 'undefined'){
-        return callback('Password is required')
+        return callback(errorManager(new Error('USER_EXIST')));
     }
     let user = new User({name:userData.name,
         email:userData.email,

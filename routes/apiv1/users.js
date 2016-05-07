@@ -11,8 +11,10 @@ let router = express.Router();
 
 let User = require('mongoose').model('User');
 let PushToken = require('mongoose').model('PushToken');
+
 let hash = require('hash.js');
 let mobileDetect = require('mobile-detect');
+let errorManager = require('../../lib/errorManager');
 
 router.post('/register',function (req, res) {
     //Recogemos los valores que nos mandan
@@ -24,16 +26,16 @@ router.post('/register',function (req, res) {
     //Comprobamos si ya existe
     User.findUser(userData, function (err, user) {
         if (err){
-            return res.status(500).json({success:false, error:err});
+            return errorManager(err, req, res);
         }
         //Si ya existe
         if (user){
-            return res.json({success:false, err:'El usuario ya existe'});
+            return errorManager(new Error('PASS_REQUIRED'), req, res);
         }
         //Si no existe creamos uno
         User.saveUser(userData, function (err, saved) {
             if (err){
-                return res.status(500).json({success:false, err:err});
+                return errorManager(err, req, res);
             }
             return res.json({success:true, saved:saved})
         });
@@ -52,13 +54,13 @@ router.post('/authenticate', function (req, res) {
     //Buscamos el usuario en la base de datos
     User.findUser(userData, function (err, user) {
         if (err){
-            return res.status(500).json({success:false, error:err});
+            return errorManager(err, req, res);
         }
         if (!user){
-            return res.status(401).json({success:false, error:'Authetication failed. User name or email is not found'});
+            return errorManager(new Error('USER_OR_MAIL_NOT_FOUND'), req, res);
         }
         if (user.passw !== userPass){
-            return res.status(401).json({success:false, error:'Authentication failed. The password is not correct'});
+            return errorManager(new Error('PASS_INCORRECT'), req, res);
         }
         //Creamos el token con la clave del fichero de configuracion y lo devolvemos
         let token = jwt.sign({id:user._id},config.jwt.secret, {expiresIn:60*60*2*24});
@@ -82,16 +84,16 @@ router.put('/pushtoken', function (req, res) {
 
     User.findUser(userData, function (err, user) {
         if (err){
-            return res.status(500).json({success:false, error:err});
+            return errorManager(err, req, res);
         }
         if (!user){
             //todo: Guardamos token si no existe usuario???
-            return res.status(401).json({success:false, error:' User name or email is not found'});
+            return errorManager(new Error('USER_OR_MAIL_NOT_FOUND'), req, res);
         }
         //Guardamos el token
         PushToken.saveToken(user, pushToken, platform, function (err, saved ) {
             if (err){
-                return res.status(500).json({success: false, error: err});
+                return errorManager(err, req, res);
             }
             return res.json({success:true, saved:saved});
         });

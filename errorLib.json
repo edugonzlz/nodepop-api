@@ -1,0 +1,20 @@
+{
+    "USER_EXIST":
+    {
+        "es": "El usuario ya existe",
+        "eng": "The user already exists"
+    },
+    "USER_OR_MAIL_NOT_FOUND":
+    {
+        "es": "El usuario o el email no se han encontrado",
+        "eng": "The user or email is not found"
+    },
+    "PASS_INCORRECT":{
+        "es": "La contraseña introducida es incorrecta",
+        "eng": "Incorrect password introduced"
+    },
+    "PASS_REQUIRED":{
+        "es": "Es obligatorio introducir una contraseña",
+        "eng": "Please insert a password"
+    }
+}

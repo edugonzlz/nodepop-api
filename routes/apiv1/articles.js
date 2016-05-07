@@ -11,6 +11,8 @@ let Article = mongoose.model('Article');
 
 let jwtAuth = require('../../lib/jwtAuth');
 let mobileDetect = require('mobile-detect');
+let errorManager = require('../../lib/errorManager');
+
 //Requerimos autenticacion para uso del modulo
 //router.use(jwtAuth());
 
@@ -62,7 +64,7 @@ router.get('/', function (req, res) {
     //Llamamos a la busqueda con el critrerio de busqueda y paginacion
     return Article.list(searchCriteria, start, limit, sort, function (err, rows) {
         if (err){
-            return res.json({success:false, error:err});
+            return errorManager(err, req, res);
         }
         return res.json({success:true, rows:rows});
     })
@@ -76,7 +78,7 @@ router.get('/tags',function (req, res) {
     
     Article.tagList(function (err, tagList) {
         if (err){
-            return res.json({success:false, error:err});
+            return errorManager(err, req, res);
         }
         return res.json({success:true, rows:tagList});
     })
@@ -88,7 +90,7 @@ router.post("/", function (req, res) {
 
     Article.saveArticle(article, function (err, saved) {
         if (err){
-            return res.json({success:false, error: err});
+            return errorManager(err, req, res);
         }
         console.log('Articulo guardado', saved);
         return res.json({success:true, saved:saved});

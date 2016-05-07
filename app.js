@@ -27,6 +27,10 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use((req, res, next) => {
+    req.lang = req.get('x-lang') || 'en';
+    next();
+});
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/images/articles', express.static(path.join(__dirname, 'public/images')));
 

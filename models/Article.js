@@ -32,6 +32,7 @@ articleSchema.statics.saveArticle = function (newArticle, callback) {
         }
         return callback(err,saved);
     })
+
 };
 
 articleSchema.statics.tagList = function (callback) {
