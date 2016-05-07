@@ -19,7 +19,7 @@ router.post('/register',function (req, res) {
     let userName = req.body.name;
     let userMail = req.body.email;
     let userPass = req.body.passw;
-    
+
     let userData = new User({name:userName, email:userMail, passw:userPass});
     //Comprobamos si ya existe
     User.findUser(userData, function (err, user) {

@@ -5,13 +5,20 @@ let hash = require('hash.js');
 
 let userSchema = mongoose.Schema({
     //TODO: hacer todo required y hacer index por email
-    name: String,
-    email: String,
-    passw: String
+    name: {type: String, required: true},
+    email: {type: String, index: true, required: true},
+    passw: {type: String, required: true}
 });
 
+// userSchema.index({ email: 1, type: -1 });
+// userSchema.index({ email: 1 }, { unique: true });
+
 userSchema.statics.saveUser = function (userData,  callback) {
-    
+
+    //Hash genera codigo incluso con un undefined, por eso comprobamos primero
+    if (typeof userData.passw === 'undefined'){
+        return callback('Password is required')
+    }
     let user = new User({name:userData.name,
         email:userData.email,
         passw:hash.sha256().update(userData.passw).digest('hex')});
