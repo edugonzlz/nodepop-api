@@ -1,10 +1,10 @@
 Ejercicio práctico realizado con Javascript, Node.js, Express.js y MongoDB para el Master de KeepCoding
 
 ##Acceso a este documento
-Se puede acceder a este documento readme con la api funcionando desde cualquier navegador en:
+Con la api corriendo, se puede acceder a este documento readme desde cualquier navegador en:
 
 - Ruta
-  - /apiv1
+  - /apiv1 (localhost:3000/apiv1)
 
 ##Descripción
 Esta api da servicio a una app de venta de articulos de segunda mano. Se comunicará con versiones de iOS como Android y también Web.
@@ -13,18 +13,22 @@ Realiza las siguientes tareas
 - Entrega de lista de anuncios, paginada, ordenada, con filtros por tag, tipo de anuncio (venta o búsqueda), rango de precio (minimo y máximo) y nombre del articulo.
 - Entrega de lista de tags.
 - Almacenamiento de token de push.
-- Almacenamiento de anuncios con nombre, precio, tags, tipo de anuncio (venta o búsqueda), foto.
+- Almacenamiento de anuncios con nombre, precio, tags, tipo de anuncio (venta o búsqueda).
 
 Usa los siguientes módulos para su funcionamiento
 - jsonwebtoken, para realizar la autenticación
 - async, librería con funcionalidades asíncronas
 - hash, para guardar la contraseña del usuario mediante un hash
 - mobile-detect, para detectar la plataforma móvil del usuario
+- express-markdown-router, para renderizar archivos readme en html (actualmente no se está usando)
 
 Esta construida con Node.js, sobre Express.js, con una base de datos MongoDB sobre Mongoose.
 
 ##Uso de la api
-
+*****
+**La api necesita una base de datos de MongoDB corriendo y se conecta en el puerto 27017.**
+Se pueden realizar peticiones locales desde un navegador o aplicaciones como Postman en localhost:3000/
+*****
 ###Instalar modulos npm
 Es necesario instalar los módulos y dependencias antes de ejecutar la aplicación
 

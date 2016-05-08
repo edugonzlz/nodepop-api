@@ -28,21 +28,24 @@
 </div>
 <div id="contentarea"><div class="cell markdown-cell"><p>Ejercicio práctico realizado con Javascript, Node.js, Express.js y MongoDB para el Master de KeepCoding</p>
         <h2 id="acceso-a-este-documento">Acceso a este documento</h2>
-        <p>Se puede acceder a este documento readme con la api funcionando desde cualquier navegador en:</p>
+        <p>Con la api corriendo, se puede acceder a este documento readme desde cualquier navegador en:</p>
         <ul>
             <li>Ruta<ul>
-                    <li>/apiv1</li></ul>
+                    <li>/apiv1 (localhost:3000/apiv1)</li></ul>
             </li></ul>
         <h2 id="descripci-n">Descripción</h2>
         <p>Esta api da servicio a una app de venta de articulos de segunda mano. Se comunicará con versiones de iOS como Android y también Web.</p>
         <p>Realiza las siguientes tareas</p>
         <ul>
-            <li>Entrega de lista de anuncios, paginada, ordenada, con filtros por tag, tipo de anuncio (venta o búsqueda), rango de precio (minimo y máximo) y nombre del articulo.</li><li>Entrega de lista de tags.</li><li>Almacenamiento de token de push.</li><li>Almacenamiento de anuncios con nombre, precio, tags, tipo de anuncio (venta o búsqueda), foto.</li></ul>
+            <li>Entrega de lista de anuncios, paginada, ordenada, con filtros por tag, tipo de anuncio (venta o búsqueda), rango de precio (minimo y máximo) y nombre del articulo.</li><li>Entrega de lista de tags.</li><li>Almacenamiento de token de push.</li><li>Almacenamiento de anuncios con nombre, precio, tags, tipo de anuncio (venta o búsqueda).</li></ul>
         <p>Usa los siguientes módulos para su funcionamiento</p>
         <ul>
-            <li>jsonwebtoken, para realizar la autenticación</li><li>async, librería con funcionalidades asíncronas</li><li>hash, para guardar la contraseña del usuario mediante un hash</li><li>mobile-detect, para detectar la plataforma móvil del usuario</li></ul>
+            <li>jsonwebtoken, para realizar la autenticación</li><li>async, librería con funcionalidades asíncronas</li><li>hash, para guardar la contraseña del usuario mediante un hash</li><li>mobile-detect, para detectar la plataforma móvil del usuario</li><li>express-markdown-router, para renderizar archivos readme en html (actualmente no se está usando)</li></ul>
         <p>Esta construida con Node.js, sobre Express.js, con una base de datos MongoDB sobre Mongoose.</p>
         <h2 id="uso-de-la-api">Uso de la api</h2>
+        <hr>
+        <p><strong>La api necesita una base de datos de MongoDB corriendo y se conecta en el puerto 27017.</strong><br>Se pueden realizar peticiones locales desde un navegador o aplicaciones como Postman en localhost:3000/</p>
+        <hr>
         <h3 id="instalar-modulos-npm">Instalar modulos npm</h3>
         <p>Es necesario instalar los módulos y dependencias antes de ejecutar la aplicación</p>
 <pre><div class="ace-github"><div class="ace_static_highlight ace_show_gutter" style="counter-reset:ace_line 0"><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>npm&nbsp;install
