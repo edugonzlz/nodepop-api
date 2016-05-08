@@ -7,6 +7,8 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 
+var markdownRouter = require('express-markdown-router');
+
 var app = express();
 
 //Base de datos
@@ -31,10 +33,15 @@ app.use((req, res, next) => {
     req.lang = req.get('x-lang') || 'es';
     next();
 });
+
+// app.use('/',markdownRouter(__dirname + '/views'));
+// app.use('/apiv1',markdownRouter(__dirname + '/views'));
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/images/articles', express.static(path.join(__dirname, 'public/images')));
 
 app.use('/', routes);
+app.use('/apiv1', routes);
 app.use('/apiv1/articles', require('./routes/apiv1/articles'));
 app.use('/apiv1/users', require('./routes/apiv1/users'));
 

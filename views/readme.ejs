@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- common.css -->
+    <style>* {-webkit-tap-highlight-color: rgba(0,0,0,0);}html {-webkit-text-size-adjust: none;}body {font-family: Arial, Helvetica, sans-serif;margin: 0;color: #333;word-wrap: break-word;}h1, h2, h3, h4, h5, h6 {line-height: 1.1;}img {max-width: 100% !important;}blockquote {margin: 0;padding: 0 15px;color: #777;border-left: 4px solid #ddd;}hr {background-color: #ddd;border: 0;height: 1px;margin: 15px 0;}code {font-family: Menlo, Consolas, 'Ubuntu Mono', Monaco, 'source-code-pro', monospace;line-height: 1.4;margin: 0;padding: 0.2em 0;font-size: 85%;background-color: rgba(0,0,0,0.04);border-radius: 3px;}pre > code {margin: 0;padding: 0;font-size: 100%;word-break: normal;background: transparent;border: 0;}ol {list-style-type: decimal;}ol ol, ul ol {list-style-type: lower-latin;}ol ol ol, ul ol ol, ul ul ol, ol ul ol {list-style-type: lower-roman;}table {border-spacing: 0;border-collapse: collapse;margin-top: 0;margin-bottom: 16px;}table th {font-weight: bold;}table th, table td {padding: 6px 13px;border: 1px solid #ddd;}table tr {border-top: 1px solid #ccc;}table tr:nth-child(even) {background-color: #f8f8f8;}input[type="checkbox"] {cursor: default;margin-right: 0.5em;font-size: 13px;}.task-list-item {list-style-type: none;}.task-list-item+.task-list-item {margin-top: 3px;}.task-list-item input {float: left;margin: 0.3em 1em 0.25em -1.6em;vertical-align: middle;}#tag-field {margin: 8px 2px 10px;}#tag-field .tag {display: inline-block;background: #cadff3;border-radius: 4px;padding: 1px 8px;color: black;font-size: 12px;margin-right: 10px;line-height: 1.4;}</style>
+    <!-- ace-static.css -->
+    <style>.ace_static_highlight {white-space: pre-wrap;}.ace_static_highlight .ace_gutter {width: 2em;text-align: right;padding: 0 3px 0 0;margin-right: 3px;}.ace_static_highlight.ace_show_gutter .ace_line {padding-left: 2.6em;}.ace_static_highlight .ace_line {position: relative;}.ace_static_highlight .ace_gutter-cell {-moz-user-select: -moz-none;-khtml-user-select: none;-webkit-user-select: none;user-select: none;top: 0;bottom: 0;left: 0;position: absolute;}.ace_static_highlight .ace_gutter-cell:before {content: counter(ace_line, decimal);counter-increment: ace_line;}.ace_static_highlight {counter-reset: ace_line;}</style>
+    <style>.ace-github .ace_gutter {background: #e8e8e8;color: #AAA;}.ace-github  {background: #fff;color: #000;}.ace-github .ace_keyword {font-weight: bold;}.ace-github .ace_string {color: #D14;}.ace-github .ace_variable.ace_class {color: teal;}.ace-github .ace_constant.ace_numeric {color: #099;}.ace-github .ace_constant.ace_buildin {color: #0086B3;}.ace-github .ace_support.ace_function {color: #0086B3;}.ace-github .ace_comment {color: #998;font-style: italic;}.ace-github .ace_variable.ace_language  {color: #0086B3;}.ace-github .ace_paren {font-weight: bold;}.ace-github .ace_boolean {font-weight: bold;}.ace-github .ace_string.ace_regexp {color: #009926;font-weight: normal;}.ace-github .ace_variable.ace_instance {color: teal;}.ace-github .ace_constant.ace_language {font-weight: bold;}.ace-github .ace_cursor {color: black;}.ace-github .ace_marker-layer .ace_active-line {background: rgb(255, 255, 204);}.ace-github .ace_marker-layer .ace_selection {background: rgb(181, 213, 255);}.ace-github.ace_multiselect .ace_selection.ace_start {box-shadow: 0 0 3px 0px white;border-radius: 2px;}.ace-github.ace_nobold .ace_line > span {font-weight: normal !important;}.ace-github .ace_marker-layer .ace_step {background: rgb(252, 255, 0);}.ace-github .ace_marker-layer .ace_stack {background: rgb(164, 229, 101);}.ace-github .ace_marker-layer .ace_bracket {margin: -1px 0 0 -1px;border: 1px solid rgb(192, 192, 192);}.ace-github .ace_gutter-active-line {background-color : rgba(0, 0, 0, 0.07);}.ace-github .ace_marker-layer .ace_selected-word {background: rgb(250, 250, 255);border: 1px solid rgb(200, 200, 250);}.ace-github .ace_print-margin {width: 1px;background: #e8e8e8;}.ace-github .ace_indent-guide {background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAACCAYAAACZgbYnAAAAE0lEQVQImWP4////f4bLly//BwAmVgd1/w11/gAAAABJRU5ErkJggg==") right repeat-y;}</style>
+    <!-- export.css -->
+    <style>
+        body{margin:0 auto;max-width:800px;line-height:1.4}
+        #nav{margin:5px 0 10px;font-size:15px}
+        #titlearea{border-bottom:1px solid #ccc;font-size:17px;padding:10px 0;}
+        #contentarea{font-size:15px;margin:16px 0}
+        .cell{outline:0;min-height:20px;margin:5px 0;padding:5px 0;}
+        .code-cell{font-family:Menlo,Consolas,'Ubuntu Mono',Monaco,'source-code-pro',monospace;font-size:12px;}
+        .latex-cell{white-space:pre-wrap;}
+    </style>
+    <!-- User CSS -->
+    <style> .text-cell {font-size: 15px;}.code-cell {font-size: 12px;}.markdown-cell {font-size: 15px;}.latex-cell {font-size: 15px;}</style>
+</head>
+<body>
+
+<div id="titlearea">
+    <h2>Readme Api Nodepop</h2>
+</div>
+<div id="contentarea"><div class="cell markdown-cell"><p>Ejercicio práctico realizado con Javascript, Node.js, Express.js y MongoDB para el Master de KeepCoding</p>
+        <h2 id="acceso-a-este-documento">Acceso a este documento</h2>
+        <p>Se puede acceder a este documento readme con la api funcionando desde cualquier navegador en:</p>
+        <ul>
+            <li>Ruta<ul>
+                    <li>/apiv1</li></ul>
+            </li></ul>
+        <h2 id="descripci-n">Descripción</h2>
+        <p>Esta api da servicio a una app de venta de articulos de segunda mano. Se comunicará con versiones de iOS como Android y también Web.</p>
+        <p>Realiza las siguientes tareas</p>
+        <ul>
+            <li>Entrega de lista de anuncios, paginada, ordenada, con filtros por tag, tipo de anuncio (venta o búsqueda), rango de precio (minimo y máximo) y nombre del articulo.</li><li>Entrega de lista de tags.</li><li>Almacenamiento de token de push.</li><li>Almacenamiento de anuncios con nombre, precio, tags, tipo de anuncio (venta o búsqueda), foto.</li></ul>
+        <p>Usa los siguientes módulos para su funcionamiento</p>
+        <ul>
+            <li>jsonwebtoken, para realizar la autenticación</li><li>async, librería con funcionalidades asíncronas</li><li>hash, para guardar la contraseña del usuario mediante un hash</li><li>mobile-detect, para detectar la plataforma móvil del usuario</li></ul>
+        <p>Esta construida con Node.js, sobre Express.js, con una base de datos MongoDB sobre Mongoose.</p>
+        <h2 id="uso-de-la-api">Uso de la api</h2>
+        <h3 id="instalar-modulos-npm">Instalar modulos npm</h3>
+        <p>Es necesario instalar los módulos y dependencias antes de ejecutar la aplicación</p>
+<pre><div class="ace-github"><div class="ace_static_highlight ace_show_gutter" style="counter-reset:ace_line 0"><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>npm&nbsp;install
+</div></div></div></pre><h3 id="carga-de-anuncios-y-usuarios">Carga de anuncios y usuarios</h3>
+        <p>La aplicación del api dispone de un script que instala varios elementos en la base de datos desde un archivo json para poder probarla.<br>Dentro de la carpeta raiz de usuario escribe:</p>
+<pre><div class="ace-github"><div class="ace_static_highlight ace_show_gutter" style="counter-reset:ace_line 0"><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>npm&nbsp;run&nbsp;installdb
+</div></div></div></pre><p>Si se desean cargar otros anuncios o usuarios, se pueden añadir en formato <code>json</code> en los archivos:</p>
+        <ul>
+            <li>articlesData.json - para cargar anuncios</li><li>usersData.json - para cargar usuarios</li></ul>
+        <h4 id="formato-de-un-anuncio">Formato de un anuncio</h4>
+        <ul>
+            <li>Requiere formato json</li><li>Propiedades de un anuncio: <ul>
+                    <li>name(String), </li><li>forSale(boolean), </li><li>price(Number) <em>precio exacto</em><ul>
+                            <li>price(Number-) <em>precio mínimo</em></li><li>price(-Number) <em>precio máximo</em></li><li>price(Number-Number) <em>precio entre dos valores</em></li></ul>
+                    </li><li>photo(String)</li><li>tags(Array)</li></ul>
+            </li></ul>
+        <p>Ejemplo de un archivo <code>articlesData.json</code></p>
+<pre><div class="ace-github"><div class="ace_static_highlight ace_show_gutter" style="counter-reset:ace_line 0"><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>{
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>"articles":&nbsp;[&nbsp;{
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>"name":&nbsp;"Bicicleta",&nbsp;
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>"forSale":&nbsp;true,
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>"price":&nbsp;230.15,
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>"photo":&nbsp;"bici.jpg",
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>"tags":&nbsp;[&nbsp;"lifestyle",&nbsp;"motor"]
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>},&nbsp;{
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>"name":&nbsp;"iPhone&nbsp;3GS",&nbsp;
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>"forSale":&nbsp;false,
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>"price":&nbsp;50.00,
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>"photo":&nbsp;"iphone.png",
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>"tags":&nbsp;[&nbsp;"lifestyle",&nbsp;"mobile"]
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>}&nbsp;]
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>}
+</div></div></div></pre></div><div class="cell markdown-cell"><h4 id="formato-de-un-usuario">Formato de un usuario</h4>
+        <ul>
+            <li>Requiere formato json</li><li>Propiedades de un anuncio: <ul>
+                    <li>name(String), </li><li>email(String), </li><li>passw(String)</li></ul>
+            </li></ul>
+        <p>Ejemplo de un archivo <code>usersData.json</code></p>
+<pre><div class="ace-github"><div class="ace_static_highlight ace_show_gutter" style="counter-reset:ace_line 0"><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>{
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>&nbsp;&nbsp;"users":[
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>&nbsp;&nbsp;&nbsp;&nbsp;{
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;"name":"Edu",
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;"email":"edu@mail.com",
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;"passw":"1234"
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>&nbsp;&nbsp;&nbsp;&nbsp;}
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>&nbsp;&nbsp;]
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>}
+</div></div></div></pre></div><div class="cell markdown-cell"><h3 id="arrancar-la-api">Arrancar la api</h3>
+        <p>Escribe en la linea de comando:</p>
+<pre><div class="ace-github"><div class="ace_static_highlight ace_show_gutter" style="counter-reset:ace_line 0"><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>npm&nbsp;run&nbsp;start
+</div></div></div></pre><h3 id="idiomas-del-api">Idiomas del api</h3>
+        <p>La api genera mensajes de error en español e inglés.<br>Es necesario especificar el idioma en cada petición. El lenguaje por defecto es español.</p>
+        <h4 id="enviar-el-lenguaje-de-uso-deseado">Enviar el lenguaje de uso deseado</h4>
+        <ul>
+            <li>Donde<ul>
+                    <li>Headers</li></ul>
+            </li><li>Parámetros opcionales<ul>
+                    <li>x-lang</li></ul>
+            </li><li>Posibles valores<ul>
+                    <li>es (idioma español)</li><li>eng (idioma inglés)</li></ul>
+            </li></ul>
+        <h3 id="registro-de-usuario">Registro de usuario</h3>
+        <p>El usuario debe registrarse para poder realizar peticiones a la api</p>
+        <h4 id="registrar-un-usuario">Registrar un usuario</h4>
+        <ul>
+            <li>Método<ul>
+                    <li>POST</li></ul>
+            </li><li>Ruta<ul>
+                    <li>/apiv1/users/register</li></ul>
+            </li><li>Donde<ul>
+                    <li>Body</li></ul>
+            </li><li>Formato<ul>
+                    <li>x-www-form-urlencoded</li></ul>
+            </li><li>Parámetros posibles y obligatorios<ul>
+                    <li>name(String), email(String), passw(String)</li></ul>
+            </li><li><p>Respuesta</p>
+<pre><div class="ace-github"><div class="ace_static_highlight ace_show_gutter" style="counter-reset:ace_line 0"><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>{
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>"success":&nbsp;true,
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>"saved":&nbsp;{
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>&nbsp;&nbsp;"name":&nbsp;"Jose",
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>&nbsp;&nbsp;"email":&nbsp;"jose@mail.com"
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>}
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>}
+</div></div></div></pre></li></ul>
+    </div><div class="cell markdown-cell"><h3 id="autenticaci-n-de-usuario">Autenticación de usuario</h3>
+        <p>El usuario registrado debe solicitar un token que deberá usar en todas las peticiones de anuncios. </p>
+        <h4 id="autenticar-un-usuario">Autenticar un usuario</h4>
+        <ul>
+            <li>Método<ul>
+                    <li>POST</li></ul>
+            </li><li>Ruta<ul>
+                    <li>/apiv1/users/authenticate</li></ul>
+            </li><li>Parámetros posibles y obligatorios<ul>
+                    <li>name(String), email(String), passw(String)</li></ul>
+            </li><li>Donde<ul>
+                    <li>Body</li></ul>
+            </li><li>Formato<ul>
+                    <li>x-www-form-urlencoded</li></ul>
+            </li><li><p>Respuesta</p>
+<pre><div class="ace-github"><div class="ace_static_highlight ace_show_gutter" style="counter-reset:ace_line 0"><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>{
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>&nbsp;&nbsp;"success":&nbsp;true,
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>&nbsp;&nbsp;"token":&nbsp;"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU3MmUzYjQ5NGM1OWQ3NDM2ZjE0YzkzNSIsImlhdCI6MTQ2MjY5ODM5OSwiZXhwIjoxNDYyODcxMTk5fQ.nnZzi7cwfXT-gE3cGqDJzLR-GerbUuNMHf5jGEfpVp0"
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>}
+</div></div></div></pre></li></ul>
+    </div><div class="cell markdown-cell"><h4 id="usar-el-token">Usar el token</h4>
+        <p>El token recibido se debe enviar a la api en una query en cada petición de anuncios.<br>Por ejemplo<br><code>/apiv1/articles?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU3MmUzYjQ5NGM1OWQ3NDM2ZjE0YzkzNSIsImlhdCI6MTQ2MjY5ODM5OSwiZXhwIjoxNDYyODcxMTk5fQ.nnZzi7cwfXT-gE3cGqDJzLR-GerbUuNMHf5jGEfpVp0</code></p>
+        <h3 id="obtener-una-lista-de-anuncios">Obtener una lista de anuncios</h3>
+        <p>La api permite peticiones de listas de anuncios con filtros de búsqueda y paginación.</p>
+        <ul>
+            <li>Método<ul>
+                    <li>GET</li></ul>
+            </li><li>Ruta<ul>
+                    <li>/apiv1/articles</li></ul>
+            </li><li>Parámetros de búsqueda posibles y opcionales<ul>
+                    <li>name(String), </li><li>forSale(boolean), </li><li>price(Number) ó price(Number-) ó price(-Number) ó price(Number-Number)</li><li>tags(Array) </li></ul>
+            </li><li>Paginación<ul>
+                    <li>sort (orden de presentación)</li><li>start (posición desde la que se entrega el primer anuncio)</li><li>limit (cantidad de anuncios entregada)</li></ul>
+            </li><li>Donde<ul>
+                    <li>query</li></ul>
+            </li><li>Ejemplo<br><code>/apiv1/articles/?price=50-300&amp;forSale=true&amp;limit=2&amp;sort=name&amp;start=0&amp;token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU3MmUzYjQ5NGM1OWQ3NDM2ZjE0YzkzNSIsImlhdCI6MTQ2MjY5ODM5OSwiZXhwIjoxNDYyODcxMTk5fQ.nnZzi7cwfXT-gE3cGqDJzLR-GerbUuNMHf5jGEfpVp0</code></li><li><p>Respuesta</p>
+<pre><div class="ace-github"><div class="ace_static_highlight ace_show_gutter" style="counter-reset:ace_line 0"><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>&nbsp;&nbsp;{"success":true,
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;"rows":[{"_id":"572e3b494c59d7436f14c933",
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;"name":"Bicicleta",
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;"forSale":true,
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;"price":230.15,
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;"photo":"bicycle.jpg",
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;"__v":0,
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;"tags":["lifestyle","motor"]}
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>]}
+</div></div></div></pre></li></ul>
+    </div><div class="cell markdown-cell"><h3 id="obtener-im-genes-de-los-anuncios">Obtener imágenes de los anuncios</h3>
+        <p>Para obtener las imágenes que corresponde a cada anuncio debemos usar la propiedad <code>photo</code>del objeto recibido en la petición de anuncios.</p>
+        <ul>
+            <li>Método<ul>
+                    <li>GET</li></ul>
+            </li><li>Ruta<ul>
+                    <li>/apiv1/images/articles</li></ul>
+            </li><li>Parámetros obligatorios<ul>
+                    <li>nombre de recurso</li></ul>
+            </li><li>Donde<ul>
+                    <li>ruta /apiv1/iamges/articles</li></ul>
+            </li><li>Ejemplo<br><code>http://localhost:3000/images/articles/iphone.jpg</code></li><li>Respuesta<ul>
+                    <li>Imagen requerida en formato .jpg</li></ul>
+            </li></ul>
+        <h3 id="guardar-anuncios">Guardar Anuncios</h3>
+        <p>La api permite guardar anuncios.<br><em>Aún no es posible guardar la imagen de un anuncio</em></p>
+        <ul>
+            <li>Método<ul>
+                    <li>POST</li></ul>
+            </li><li>Ruta<ul>
+                    <li>/apiv1/articles</li></ul>
+            </li><li>Parámetros posibles y temporalmente opcionales<ul>
+                    <li>name(String), </li><li>forSale(boolean), </li><li>price(Number) ó price(Number-) ó price(-Number) ó price(Number-Number)</li><li>tags(Array) </li><li>Aún no es posible enviar una foto del articulo.</li></ul>
+            </li><li>Donde<ul>
+                    <li>Body</li></ul>
+            </li><li>Formato<ul>
+                    <li>x-www-form-urlencoded</li></ul>
+            </li><li><p>Respuesta</p>
+<pre><div class="ace-github"><div class="ace_static_highlight ace_show_gutter" style="counter-reset:ace_line 0"><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>{"success":true,
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>"rows":[{"_id":"572e3b494c59d7436f14c933",
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;"name":"Bicicleta",
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;"forSale":true,
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;"price":230.15,
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;"photo":"bicycle.jpg",
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;"__v":0,
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;"tags":["lifestyle","motor"]}
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>]}
+</div></div></div></pre></li></ul>
+    </div><div class="cell markdown-cell"><h3 id="obtener-una-lista-de-tags">Obtener una lista de tags</h3>
+        <p>La api devuelve una lista de todas las tags usadas en los articulos.</p>
+        <ul>
+            <li>Método<ul>
+                    <li>GET</li></ul>
+            </li><li>Ruta<ul>
+                    <li>/apiv1/articles/tags</li></ul>
+            </li><li>Ejemplo<br><code>/apiv1/articles/tags?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU3MmUzYjQ5NGM1OWQ3NDM2ZjE0YzkzNSIsImlhdCI6MTQ2MjY5ODM5OSwiZXhwIjoxNDYyODcxMTk5fQ.nnZzi7cwfXT-gE3cGqDJzLR-GerbUuNMHf5jGEfpVp0</code></li><li><p>Respuesta</p>
+<pre><div class="ace-github"><div class="ace_static_highlight ace_show_gutter" style="counter-reset:ace_line 0"><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>{"success":true,
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>"rows":["lifestyle","motor","mobile"]}
+</div></div></div></pre></li></ul>
+    </div><div class="cell markdown-cell"><h3 id="guardar-un-push-token">Guardar un push token</h3>
+        <p>La api permite el almacenamiento de un push token, enviado por el usuario.<br>Si el usuario está registrado se guardará en relación a el, y si ya tenía un push token guardado, lo actualizará.<br>Si el usuario no está registrado se guarda también el push token.</p>
+        <ul>
+            <li>Método<ul>
+                    <li>PUT</li></ul>
+            </li><li>Ruta<ul>
+                    <li>/apiv1/articles</li></ul>
+            </li><li>Parámetros posibles y opcionales<ul>
+                    <li>name(String)</li><li>email(String)</li></ul>
+            </li><li>Donde<ul>
+                    <li>Body</li></ul>
+            </li><li>Formato<ul>
+                    <li>x-www-form-urlencoded</li></ul>
+            </li><li>Ejemplo<br><code>/apiv1/users/pushtoken?pushtoken=kjasdfkljsadf98asdf</code></li><li><p>Respuesta</p>
+<pre><div class="ace-github"><div class="ace_static_highlight ace_show_gutter" style="counter-reset:ace_line 0"><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>&nbsp;{
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>&nbsp;&nbsp;"success":&nbsp;true,
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>&nbsp;&nbsp;"saved":&nbsp;{
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>&nbsp;&nbsp;&nbsp;&nbsp;"__v":&nbsp;0,
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>&nbsp;&nbsp;&nbsp;&nbsp;"token":&nbsp;"sdfsdfsdfsdf234",
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>&nbsp;&nbsp;&nbsp;&nbsp;"_id":&nbsp;"572f6224a36c9f2d7a2a675e"
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>&nbsp;&nbsp;}
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>}
+</div></div></div></pre></li></ul>
+    </div><div class="cell markdown-cell"><h3 id="errores">Errores</h3>
+        <p>Ejemplos de respuesta de error</p>
+<pre><div class="ace-github"><div class="ace_static_highlight ace_show_gutter" style="counter-reset:ace_line 0"><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>&nbsp;&nbsp;{
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>&nbsp;&nbsp;&nbsp;&nbsp;"success":&nbsp;false,
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>&nbsp;&nbsp;&nbsp;&nbsp;"message":&nbsp;"La&nbsp;contraseña&nbsp;introducida&nbsp;es&nbsp;incorrecta",
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>&nbsp;&nbsp;&nbsp;&nbsp;"error":&nbsp;{}
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>&nbsp;&nbsp;}
+</div></div></div></pre></div><div class="cell markdown-cell"><pre><div class="ace-github"><div class="ace_static_highlight ace_show_gutter" style="counter-reset:ace_line 0"><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>&nbsp;&nbsp;{
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>&nbsp;&nbsp;&nbsp;&nbsp;"ok":&nbsp;false,
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>&nbsp;&nbsp;&nbsp;&nbsp;"error":&nbsp;{
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;"code":&nbsp;403,
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;"message":&nbsp;"No&nbsp;token&nbsp;provided."
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>&nbsp;&nbsp;&nbsp;&nbsp;}
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>&nbsp;&nbsp;}
+</div></div></div></pre></div><div class="cell markdown-cell"><pre><div class="ace-github"><div class="ace_static_highlight ace_show_gutter" style="counter-reset:ace_line 0"><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>&nbsp;&nbsp;{
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>&nbsp;&nbsp;&nbsp;&nbsp;"success":&nbsp;false,
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>&nbsp;&nbsp;&nbsp;&nbsp;"error":&nbsp;{
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;"message":&nbsp;"User&nbsp;validation&nbsp;failed",
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;"name":&nbsp;"ValidationError",
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;"errors":&nbsp;{
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;"email":&nbsp;{
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;"message":&nbsp;"Path&nbsp;`email`&nbsp;is&nbsp;required.",
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;"name":&nbsp;"ValidatorError",
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;"properties":&nbsp;{
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;"type":&nbsp;"required",
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;"message":&nbsp;"Path&nbsp;`{PATH}`&nbsp;is&nbsp;required.",
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;"path":&nbsp;"email"
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;},
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;"kind":&nbsp;"required",
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;"path":&nbsp;"email"
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;}
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span><span class="ace_indent-guide">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;}
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>&nbsp;&nbsp;&nbsp;&nbsp;}
+</div><div class="ace_line"><span class="ace_gutter ace_gutter-cell" unselectable="on"></span>&nbsp;&nbsp;}
+</div></div></div></pre></div></div>
+<script></script>
+</body>
+</html>

@@ -57,8 +57,19 @@ router.get('/', function (req, res) {
     if (typeof forSale !== 'undefined'){
         searchCriteria.forSale = forSale;
     }
+    
+    console.log('no array' , tags, typeof tags);
+
     if (typeof tags !== 'undefined'){
-        searchCriteria.tags = {$in: tags};
+        if (typeof tags === array){
+            console.log('no array' , tags);
+            searchCriteria.tags = {$in: tags};
+        }else{
+            console.log(tags);
+
+            searchCriteria.tags = tags;
+        }
+
     }
 
     //Llamamos a la busqueda con el critrerio de busqueda y paginacion
