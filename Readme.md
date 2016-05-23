@@ -199,13 +199,13 @@ Para obtener las imágenes que corresponde a cada anuncio debemos usar la propie
 - Método
  - GET
 - Ruta
-  - /apiv1/images/articles
+  - /images/articles
 - Parámetros obligatorios
   - nombre de recurso
 - Donde
-  - ruta /apiv1/images/articles
+  - ruta /images/articles
 - Ejemplo
-`/apiv1/images/articles/iphone.jpg`
+`/images/articles/iphone.jpg`
 - Respuesta
   - Imagen requerida en formato .jpg
 
