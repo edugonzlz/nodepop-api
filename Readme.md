@@ -203,9 +203,9 @@ Para obtener las imágenes que corresponde a cada anuncio debemos usar la propie
 - Parámetros obligatorios
   - nombre de recurso
 - Donde
-  - ruta /apiv1/iamges/articles
+  - ruta /apiv1/images/articles
 - Ejemplo
-`http://localhost:3000/images/articles/iphone.jpg`
+`/apiv1/images/articles/iphone.jpg`
 - Respuesta
   - Imagen requerida en formato .jpg
 
