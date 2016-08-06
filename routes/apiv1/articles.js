@@ -25,7 +25,7 @@ router.get('/', function (req, res) {
     let tags = req.query.tags;
 
     let start = parseInt(req.query.start) || 0;
-    let limit = parseInt(req.query.limit) || null;
+    let limit = parseInt(req.query.limit) || 500;
     let sort = req.query.sort || null;
 
     //Creamos un objeto de busqueda con los parametros
