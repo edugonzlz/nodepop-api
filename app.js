@@ -62,12 +62,12 @@ if (app.get('env') === 'development') {
 
     if (req.path.match(/\/apiv\d+/)) {
       // llamada de API, devuelvo JSON
-      return res.json({
-        ok: false,
-        error: {code: err.status || 500, message: err.message, err: err}
-      });
+      return res.json({success: false, message: err.message, err: err});
+
+        // return res.status(status).json({success:false, message: error, error: err});
+
     }
-    
+
     res.render('error', {
       message: err.message,
       error: err
