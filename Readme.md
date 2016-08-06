@@ -1,5 +1,41 @@
 Ejercicio práctico realizado con Javascript, Node.js, Express.js y MongoDB para el Master de KeepCoding
 
+---
+---
+Ejercicio práctico del módulo DevOps para el Master de KeepCoding
+
+**Información para realizar una prueba de uso de la api nodepop desplegada en servidor.**
+
+Es un servidor virtual EC2 de AWS.
+
+Se usa nginx para el enrutamiento.
+
+Se usa pm2 para mantener la api corriendo automáticamente después de errores, caidas y reinicios.
+
+*Para facilitar la comprobación del profesor está desactivada la petición de token, por lo que no es necesario registrar un usuario y autenticarse*.
+
+- Petición de todos los artículos de nodepop
+
+  * Método: GET
+  * url: <http://nodepop.edugonzlz.com/apiv1/articles>
+
+- Petición de archivo estático (imagen servida por nginx y con cabecera X-Owner: @edugonzlz)
+
+  * Método: GET
+  * url: <http://nodepop.edugonzlz.com/images/iphone.jpg>
+
+- Acceso al servidor mediante la IP. Muestra una página web estática.
+
+  * IP : <http://52.1.177.94>
+  * url: <http://devops.edugonzlz.com>
+
+- Acceso a documentación de la API nodepop
+
+  * url: <http://nodepop.edugonzlz.com>
+
+---
+---
+
 ##Acceso a este documento
 Con la api corriendo, se puede acceder a este documento readme desde cualquier navegador en:
 
