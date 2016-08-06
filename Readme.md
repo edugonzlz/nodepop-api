@@ -97,6 +97,7 @@ Ejemplo de un archivo `usersData.json`
 Escribe en la linea de comando:
 
     npm run start
+    npm run cluster **Arranca en modo cluster con un nodo por procesador"
 
 ###Idiomas del api
 La api genera mensajes de error en español e inglés.

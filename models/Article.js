@@ -4,11 +4,11 @@ let mongoose = require('mongoose');
 let async = require('async');
 
 let articleSchema = mongoose.Schema({
-    name: String,
-    forSale: Boolean,
-    price: Number,
+    name: {type:String, index: true},
+    forSale: {type:Boolean, index: true},
+    price: {type:Number, index: true},
     photo: String,
-    tags: [String]
+    tags: {type:[String], index: true}
 });
 
 articleSchema.statics.list = function (filter, start, limit, sort, callback) {

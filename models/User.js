@@ -4,7 +4,7 @@ let mongoose = require('mongoose');
 let hash = require('hash.js');
 
 let userSchema = mongoose.Schema({
-    name: {type: String, required: true},
+    name: {type: String, index: true, required: true},
     email: {type: String, index: true, required: true},
     passw: {type: String, required: true}
 });

@@ -3,9 +3,9 @@
 let mongoose = require('mongoose');
 
 let pushTokenSchema = mongoose.Schema({
-    platform: {type: String, enum: ['iOS', 'AndroidOS']},
-    token: String,
-    userId: String
+    platform: {type: String, enum: ['iOS', 'AndroidOS'], index: true},
+    token: {type:String, index: true},
+    userId: {type:String, index: true}
 });
 
 pushTokenSchema.statics.saveToken = function (user, pushToken, platform, callback) {

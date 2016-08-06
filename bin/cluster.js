@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-"use strict";
 
 /**
  * Module dependencies.
@@ -16,19 +15,56 @@ var http = require('http');
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-    /**
-     * Create HTTP server.
-     */
+// Control de cluster - inicio
 
-    var server = http.createServer(app);
+var cluster = require('cluster');
 
-    /**
-     * Listen on provided port, on all network interfaces.
-     */
+if (cluster.isMaster) {
 
-    server.listen(port);
-    server.on('error', onError);
-    server.on('listening', onListening);
+  cluster.on('listening', function(worker, address) {
+    console.log('Worker ' + worker.id + ' con pid ' + worker.process.pid + ' is now connected to port ' +
+        address.port);
+  });
+
+  cluster.on('exit', function(worker, code, signal) {
+    console.log('Worker ' + worker.process.pid + ' died with code: ' + code + ', and signal: ' + signal);
+    console.log('Starting a new worker');
+    cluster.fork();
+  });
+
+  cluster.on('disconnect', function(worker) {
+    console.log('The worker #' + worker.id + ' has disconnected');
+  });
+
+  var numCPUs = require('os').cpus().length;
+
+  console.log('starting cluster for ' + numCPUs + ' cpus...');
+
+  // Fork workers.
+  for (var i = 0; i < numCPUs; i++) {
+    cluster.fork();
+  }
+
+  //console.log(cluster.workers);
+
+} else {
+
+  // Control de cluster - fin
+
+  /**
+   * Create HTTP server.
+   */
+
+  var server = http.createServer(app);
+
+  /**
+   * Listen on provided port, on all network interfaces.
+   */
+
+  server.listen(port);
+  server.on('error', onError);
+  server.on('listening', onListening);
+}
 
 /**
  * Normalize a port into a number, string, or false.
@@ -87,5 +123,5 @@ function onListening() {
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+  debug('Listening on ' + bind + ' (env: ' + app.get('env') + ')');
 }

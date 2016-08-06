@@ -97,6 +97,7 @@ Ejemplo de un archivo `usersData.json`
 Escribe en la linea de comando:
 
     npm run start
+    npm run cluster **Arranca en modo cluster con un nodo por procesador"
 
 ###Idiomas del api
 La api genera mensajes de error en español e inglés.
@@ -199,13 +200,13 @@ Para obtener las imágenes que corresponde a cada anuncio debemos usar la propie
 - Método
  - GET
 - Ruta
-  - /apiv1/images/articles
+  - /images/articles
 - Parámetros obligatorios
   - nombre de recurso
 - Donde
-  - ruta /apiv1/iamges/articles
+  - ruta /images/articles
 - Ejemplo
-`http://localhost:3000/images/articles/iphone.jpg`
+`/images/articles/iphone.jpg`
 - Respuesta
   - Imagen requerida en formato .jpg
 

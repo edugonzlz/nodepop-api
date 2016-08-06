@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "DEBUG=generated:* nodemon ./bin/www",
-    "installdb": "node ./lib/installDb"
+    "installdb": "node ./lib/installDb",
+    "cluster": "node ./bin/cluster"
   },
   "dependencies": {
     "async": "^2.0.0-rc.3",
