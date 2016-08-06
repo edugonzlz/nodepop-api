@@ -26,7 +26,7 @@ router.get('/', function (req, res) {
 
     let start = parseInt(req.query.start) || 0;
     let limit = parseInt(req.query.limit) || 500;
-    let sort = req.query.sort || null;
+    let sort = req.query.sort || '_id';
 
     //Creamos un objeto de busqueda con los parametros
     let searchCriteria = {};
